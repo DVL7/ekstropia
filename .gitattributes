@@ -1,0 +1,6 @@
+# Normalize end of lines macOS <-> Windows
+* text=auto eol=lf
+
+# Markdown
+*.md text eol=lf diff=markdown
+
