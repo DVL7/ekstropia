@@ -16,6 +16,6 @@ jak działa współczesny świat.
 
 | Katalog | Zawartość | Licencja |
 |---|---|---|
-| `/src/`  | Kod źródłowy | MIT — patrz `LICENSE` |
-| `/content/` | Artykuły, treść Atlasu | CC BY-SA 4.0 — patrz `content/LICENSE` |
-| `/docs/` | Dokumentacja | Wszelkie prawa zastrzeżone — patrz `docs/LICENSE` |
+| `/src/`  | Kod źródłowy | MIT — patrz [`LICENSE`](LICENSE) |
+| `/content/` | Artykuły, treść Atlasu | CC BY-SA 4.0 — patrz [`content/LICENSE`](content/LICENSE) |
+| `/docs/` | Dokumentacja | Wszelkie prawa zastrzeżone — patrz [`docs/LICENSE`](docs/LICENSE) |
