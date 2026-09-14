@@ -1,0 +1,41 @@
+---
+// src/components/SiteFooter.astro
+
+interface Props {
+    siteName?: string;
+    ownerName?: string;
+}
+
+const { siteName = "Ekstropia" } = Astro.props;
+const { ownerName = "Dawid Deryło" } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+    <p>&copy; {year} {ownerName} - {siteName}</p>
+    <!--  
+    <p class="licenses">
+        Kod źródłowy: <a href="https://opensource.org/license/mit" target="_blank" rel="noopener noreferrer">MIT</a>.
+        Treść i grafiki: <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pl" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.
+        Nazwa i logo Ekstropia nie są objęte wspomnianymi licencjami.
+    </p>
+    -->
+</footer>
+
+<style>
+    .site-footer {
+        padding: 1.5rem 2rem;
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--ekstropia-muted, #6b7280);
+    }
+
+    .licenses {
+        margin-top: 0.25rem;
+        font-size: 0.8rem;
+    }
+
+    .licenses a {
+        color: inherit;
+    }
+</style>

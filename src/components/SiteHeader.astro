@@ -1,0 +1,42 @@
+---
+// src/components/SiteHeader.astro
+
+interface Props {
+    logoHref?: string;
+}
+const { logoHref = "/" } = Astro.props;
+---
+
+<header class="site-header">
+    <a href={ logoHref } class="logo-link" aria-label="Ekstropia - strona główna">
+        <img 
+        src="/logo-horizontal.svg"
+        alt="Ekstropia"
+        class="logo"
+        />
+    </a>
+</header>
+
+<style>
+    .site-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1.25rem 2rem;
+    }
+
+    .logo-link {
+        display: inline-flex;
+        line-height: 0; /* usuwa odstęp pod logiem */
+    }
+
+    .logo {
+        height: 70px;
+        width: auto;
+    }
+
+    @media (min-width: 768px) {
+        .site-header {
+        justify-content: flex-start;
+  }
+</style>

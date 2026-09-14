@@ -1,0 +1,54 @@
+{
+  "name": "ekstropia",
+  "version": "1.0.0",
+  "description": "Repozytorium projektu Ekstropia — interaktywnego atlasu wiedzy o tym, jak działa współczesny świat.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "validate:content": "tsx scripts/validate-content.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:site": "astro build",
+    "build:search": "pagefind --site dist",
+    "build": "npm run validate:content && npm run build:site && npm run build:search",
+    "preview": "astro preview",
+    "test:e2e": "npm run build && playwright test",
+    "verify": "npm run check && npm run test && npm run build",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DVL7/ekstropia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/DVL7/ekstropia/issues"
+  },
+  "homepage": "https://github.com/DVL7/ekstropia#readme",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/markdown-remark": "^7.3.1",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
+    "pagefind": "^1.5.2",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
+    "unist-util-visit": "^5.1.0",
+    "vitest": "^5.0.0",
+    "wrangler": "^4.131.0",
+    "yaml": "^2.9.0"
+  }
+}

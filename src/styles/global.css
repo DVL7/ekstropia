@@ -1,0 +1,12 @@
+body {
+  font-family: "Sora", system-ui, sans-serif;
+}
+
+
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/Sora/Sora-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

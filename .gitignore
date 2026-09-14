@@ -7,3 +7,7 @@
 
 # private docs
 docs/internal/
+
+node_modules
+dist/
+.astro/

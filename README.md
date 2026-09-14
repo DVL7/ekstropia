@@ -8,14 +8,17 @@ jak działa współczesny świat.
 ## Nawigacja po repozytorium
 
 - [`src/`](src/) — kod źródłowy projektu.
-- [`content/`](content/) — artykuły i treść Atlasu.
+- [`src/content/`](src/content/) — artykuły i treść Atlasu.
+- [`public/`](public/) - Czcionki i grafiki których używa strona.
 - [`docs/public/`](docs/public/) — publiczna dokumentacja produktu, architektury i zasad tworzenia treści.
-- [`LICENSE`](LICENSE) — licencja kodu źródłowego.
 
-## Licencja
+
+## Licencje
 
 | Katalog | Zawartość | Licencja |
 |---|---|---|
-| `/src/`  | Kod źródłowy | MIT — patrz [`LICENSE`](LICENSE) |
-| `/content/` | Artykuły, treść Atlasu | CC BY-SA 4.0 — patrz [`content/LICENSE`](content/LICENSE) |
-| `/docs/` | Dokumentacja | Wszelkie prawa zastrzeżone — patrz [`docs/LICENSE`](docs/LICENSE) |
+| `/src/`  | Kod źródłowy | MIT — patrz `LICENSE` |
+| `/src/content/` | Artykuły, treść Atlasu | CC BY-SA 4.0 — patrz `content/LICENSE` |
+| `/docs/` | Dokumentacja | Wszelkie prawa zastrzeżone — patrz `docs/LICENSE` |
+| `/public/` | Grafiki i loga | Wszelkie prawa zastrzeżone - patrz `public/LICENSE` |
+| `/public/fonts/` | Czcionki | Do każdej czcionki dołączona jest licencja - patrz `public/fonts/` |

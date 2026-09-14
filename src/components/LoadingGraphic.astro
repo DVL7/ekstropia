@@ -1,0 +1,135 @@
+---
+// src/components/LoadingGraphic.astro
+
+interface Props {
+    size?: number;
+}
+
+const { size = 220 } = Astro.props;
+---
+
+<div class="graphic-wrapper" style={`--graphic-size: ${size}px`}>
+  <svg
+    class="construction-graphic"
+    viewBox="0 0 123 123"
+    role="img"
+    aria-label="Animowana ilustracja przedstawiająca połączenia i orbitę"
+    xmlns="http://www.w3.org/2000/svg"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    stroke-linejoin="round"
+    stroke-miterlimit="1.5"
+  >
+    <g class="core-network" aria-hidden="true">
+      <rect class="network-line network-line--vertical" x="40.188" y="41.391" width="2.406" height="40.098" />
+      <path class="network-line" d="M77.036 82.692H41.391v-2.406h35.645a4.61 4.61 0 0 0 0 2.406Z" />
+      <path class="network-line network-line--teal" d="m42.09 40.729 18.942 18.942-1.361 1.361-18.942-18.942 1.361-1.361Z" />
+      <path class="network-line network-line--teal" d="m40.729 80.79 40.062-40.062 1.361 1.361-40.062 40.062-1.361-1.361Z" />
+      <path class="network-line" d="M81.489 42.594H41.391v-2.406h40.098v2.406Z" />
+      <path class="network-line" d="M61.44 62.643H41.391v-2.406H61.44v2.406Z" />
+      <circle class="network-node-teal" cx="61.44" cy="61.44" r="4.611" />
+      <circle class="network-node" cx="41.391" cy="81.489" r="4.611" />
+      <circle class="network-node" cx="41.391" cy="41.391" r="4.611" />
+      <circle class="network-node network-node--small" cx="41.391" cy="61.44" r="4.058" />
+      <circle class="network-node" cx="81.489" cy="41.391" r="4.611" />
+    </g>
+
+    <path class="orbit-ring" d="M61.44 13.44c26.492 0 48 21.508 48 48s-21.508 48-48 48-48-21.508-48-48 21.508-48 48-48Zm0 1.2c25.83 0 46.8 20.97 46.8 46.8s-20.97 46.8-46.8 46.8-46.8-20.97-46.8-46.8 20.97-46.8 46.8-46.8Z" aria-hidden="true" />
+
+    <!--
+      Grupa "satelity" (łuk + kropka) obraca się natywną animacją SVG
+      (animateTransform) dokładnie wokół środka orbit-ring (61.44, 61.44).
+    -->
+    <g class="orbit-layer" aria-hidden="true">
+      <path class="orbit-accent" d="M86.036 102.659a47.998 47.998 0 0 1-60.552-7.74h1.666c8.487 8.592 20.272 13.92 33.291 13.92 8.769 0 16.977-2.417 23.996-6.62l.6 1.039Z" />
+      <circle class="orbit-node" cx="28.08" cy="94.8" r="4.611" />
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0 61.44 61.44"
+        to="360 61.44 61.44"
+        dur="6s"
+        repeatCount="indefinite"
+      />
+    </g>
+
+    <g class="corner-highlight" aria-hidden="true">
+      <path class="transparent-connector" d="m77.609 78.97-13.88-13.88a.962.962 0 0 1 0-1.36l.001-.001a.962.962 0 0 1 1.36 0l13.884 13.884a4.6 4.6 0 0 0-1.365 1.357Z" />
+      <circle class="transparent-node" cx="81.471" cy="81.489" r="4.611" />
+    </g>
+  </svg>
+</div>
+
+<style>
+    .graphic-wrapper {
+      --network-amber: #b45309;
+      --network-teal: #0f766e;
+        width: var(--graphic-size);
+        height: var(--graphic-size);
+    }
+
+    .construction-graphic {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Kolory bazowe */
+    .network-line {
+      fill: var(--network-amber);
+    }
+
+    .network-node {
+      fill: var(--network-amber);
+    }
+
+    
+    .network-line--teal {
+        fill: var(--network-teal);
+    }
+
+    .network-node-teal {
+        fill: var(--network-teal);
+    }
+
+    .orbit-ring {
+      fill: var(--network-amber);
+      fill-opacity: 0.15;
+    }
+
+    .orbit-accent {
+      fill: var(--network-teal);
+    }
+
+    .orbit-node {
+      fill: var(--network-amber);
+    }
+
+    /* Pulsowanie oparte wyłącznie na opacity — geometria się nie zmienia */
+
+    .corner-highlight {
+      animation: corner-glow 2.4s ease-in-out infinite;
+    }
+
+    .transparent-connector {
+      fill: var(--network-teal);
+      fill-opacity: 0.15;
+      stroke: var(--network-teal);
+      stroke-width: 0.24px;
+    }
+
+    .transparent-node {
+      fill: var(--network-amber);
+      fill-opacity: 0.13;
+      stroke: var(--network-amber);
+      stroke-width: 0.24px;
+    }
+
+    @keyframes corner-glow {
+      0%, 100% {
+        opacity: 0.45;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+</style>
