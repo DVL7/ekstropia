@@ -2,7 +2,6 @@ body {
   font-family: "Sora", system-ui, sans-serif;
 }
 
-
 @font-face {
   font-family: "Sora";
   src: url("/fonts/Sora/Sora-Regular.ttf") format("truetype");
