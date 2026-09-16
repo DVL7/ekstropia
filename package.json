@@ -1,6 +1,6 @@
 {
   "name": "ekstropia",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Repozytorium projektu Ekstropia — interaktywnego atlasu wiedzy o tym, jak działa współczesny świat.",
   "main": "index.js",
   "directories": {
