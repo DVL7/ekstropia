@@ -4,7 +4,7 @@
 
 - Created: `18-08-2026`
 - Last updated: `09-09-2026`
-- Version: `2.0`
+- Version: `2.1`
 
 ## Purpose
 
@@ -41,7 +41,7 @@ Wybrane dyscypliny opisujące jak zachowuje się świat.
 - Biologia 
 - Nauka o Ziemi
 
-Nazwy części węzłów mogą zostać doprecyzowane bez zmiany roli warstwy.
+ Nazwy części węzłów mogą zostać doprecyzowane bez zmiany roli warstwy.
 
 ### A2 — Technologie
 
@@ -86,6 +86,8 @@ Mini-systemy zaczynające od doświadczeń i obiektów bliskich użytkownikowi:
 
 A4 jest **otwartym typem treści**, a nie zamkniętą taksonomią. Globalna mapa może zawsze pokazywać tylko niewielki zestaw reprezentatywnych gatewayów, nawet jeśli w produkcie istnieje ich więcej.
 
+> Podane przykłady powyżej są przykładowe i nie odzwierciedlają zestawu dla MVP, ani kolejności uaktualnień. Systemy będą dodawane ze zmienną częstotliwością a przygotowanie jednego zestawu może zająć nawet kilka miesięcy.
+
 ## Meaning of a global edge
 
 Domyślna semantyka krawędzi globalnej:
@@ -129,9 +131,9 @@ Graf globalny i graf systemu mają różne zadania.
 ### Global graph
 
 - ma mało węzłów,
-- pokazuje orientację między domenami,
+- pokazuje zależności między systemami 
 - używa jednej, prostej semantyki zależności,
-- nie próbuje przedstawiać wszystkich artykułów.
+- jest swoistym punktem wejścia do głębszej eksploracji.
 
 ### System graph
 
@@ -143,6 +145,6 @@ Graf globalny i graf systemu mają różne zadania.
 
 - zawiera zazwyczaj pojedynczy dział i artykuły wokół niego,
 - stanowi wycinek z `system graph`
-- może być rozszerzony o kontekst, czyli odniesienia danych artykułów z działu do tematów zawartych w `A0-A1` i pokazaniu ich w grafie.
+- może być rozszerzony o kontekst, czyli odniesienia danych artykułów z działu do tematów zawartych w `A0-A1` oraz narzędzi i pokazaniu ich w grafie.
 
 

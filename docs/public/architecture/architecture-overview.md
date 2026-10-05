@@ -3,8 +3,8 @@
 ## Status
 
 - Created: `01-09-2026`
-- Last updated: `10-09-2026`
-- Version: `2.0`
+- Last updated: `24-09-2026`
+- Version: `2.1`
 
 ## Purpose
 
@@ -52,11 +52,10 @@ Relacje są częścią modelu wiedzy, a nie ręcznie narysowaną dekoracją.
 Z tych samych danych mogą powstawać:
 
 - globalna mapa Atlasu,
-- graf systemu,
-- lokalny graf działu,
-- prerequisite'y,
-- lista tematów powiązanych,
+- lokalne grafy systemu, conceptu, gatewaya, działu i artykułu,
+- odesłania do innych kontekstów (lista na końcu artykułu),
 - wejścia gatewayów,
+- podpięcia narzędzi,
 - walidacja sierot i błędnych odwołań.
 
 Renderer grafu nie jest źródłem prawdy.
@@ -89,10 +88,12 @@ Zmiana frameworka powinna wymagać przede wszystkim przepisania warstwy renderuj
 ```text
 Git repository
 │
-├── content entities        Markdown / MDX
+├── content entities        Markdown, hierarchia w strukturze katalogów
+├── content index           YAML (rejestr id, historia slugów)
 ├── structured data         YAML / JSON
-├── relations               structured data
-└── source catalogue        structured data
+├── atlas nodes             src/data/atlas.yaml
+├── relations               src/data/relations/
+└── source catalogue        src/content/sources/
         │
         ▼
 build pipeline
@@ -120,27 +121,40 @@ Kanoniczna treść systemów, conceptów, działów, artykułów, gatewayów i o
 
 ### Relations
 
-Relacje grafowe są przechowywane w jednym logicznym modelu relacji. Widoki takie jak `prerequisites`, `related topics`, upstream/downstream czy krawędzie lokalnego grafu są z niego wyprowadzane.
+Relacje grafowe tworzą jeden logiczny model relacji. Każda relacja ma jeden zapis: w strukturze katalogów, w linku w treści albo w pliku w `src/data/`. Widoki grafów i list są z niego wyprowadzane.
 
-Nie należy ręcznie utrzymywać tej samej relacji w dwóch encjach.
+Nie należy ręcznie utrzymywać tej samej relacji w dwóch miejscach.
+
+Zakres MVP (szczegóły: `graph-model.md`):
+
+| Relacja | Zapis |
+| :--- | :--- |
+| `foundation-for` (globalna mapa) | `src/data/atlas.yaml` |
+| `component-of` (hierarchia) | wyliczana ze struktury katalogów |
+| `explains` (odesłanie do innego kontekstu) | wyliczana z linków w treści |
+| `illustrates` (podpięcie narzędzia) | `src/data/relations/` |
+
+`prerequisite` i `related` nie wchodzą do MVP.
 
 ### Containment
 
-Hierarchia treści jest zapisywana jednokierunkowo od dziecka do rodzica, np.:
+Hierarchia treści jest zapisana wyłącznie w strukturze katalogów, np.:
 
-- dział wskazuje system lub concept,
-- artykuł wskazuje swój dział i opcjonalny kontekst.
+- dział to katalog z `index.md` wewnątrz katalogu systemu, conceptu lub gatewaya,
+- artykuł to plik w katalogu działu albo, w concepcie i gatewayu, bezpośrednio w katalogu kontekstu.
 
-Listy `sections[]` i `articles[]` są danymi wyliczanymi.
+Encje nie wskazują rodzica we frontmatterze. Rodzic, kontekst oraz listy działów i artykułów są danymi wyliczanymi. Szczegóły: `content-model.md`.
 
 ### Routes
 
 Stabilny `id` encji i publiczny `slug` są różnymi pojęciami.
 
-- `id` identyfikuje wiedzę i relacje,
-- `slug` identyfikuje publiczny adres,
+- `id` identyfikuje wiedzę i relacje; jest nadawany raz przy tworzeniu encji i zapisywany we frontmatterze,
+- `slug` identyfikuje publiczny adres; jest wyliczany z nazwy pliku lub katalogu,
 - zmiana slugu nie zmienia `id`,
-- poprzedni adres powinien otrzymać redirect.
+- poprzedni adres powinien otrzymać redirect; historię slugów prowadzi indeks treści.
+
+Konwencja slugów: `docs/public/product/information-architecture.md`. Skrypty utrzymujące `id` i indeks treści: `content-tooling.md`.
 
 ## Rendering model
 
@@ -169,7 +183,7 @@ Implementacja nie może odwracać tej semantyki.
 
 ### System and local graphs
 
-Graf systemu i graf lokalny mogą używać ograniczonego zestawu typów relacji. Typ relacji istnieje tylko wtedy, gdy ma czytelne znaczenie dla użytkownika i jest używany przez UX.
+Graf systemu to graf lokalny na stronie systemu. Graf lokalny może używać ograniczonego zestawu typów relacji. Typ relacji istnieje tylko wtedy, gdy ma czytelne znaczenie dla użytkownika i jest używany przez UX. Zawartość grafu dla każdego typu strony: `graph-model.md`, **Local graph**.
 
 ### Rendering
 
@@ -203,11 +217,12 @@ Build lub CI powinien blokować publikację co najmniej przy:
 
 - duplikacie stabilnego `id`,
 - duplikacie publicznego route,
-- relacji do nieistniejącej encji,
-- niezgodności parent/section/context,
+- relacji lub linku w treści do nieistniejącej encji,
+- linku w treści w obrębie własnego kontekstu albo do nieopublikowanej encji,
+- niepoprawnym położeniu pliku treści w strukturze katalogów,
+- niezgodności indeksu treści ze stanem plików,
 - nieistniejącym źródle cytowania,
 - opublikowanej stronie bez wymaganych metadata,
-- cyklu w relacjach typu `prerequisite`,
 - opublikowanej stronie merytorycznej będącej sierotą,
 - redirectzie kolidującym z aktywnym route.
 

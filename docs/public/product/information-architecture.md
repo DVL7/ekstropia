@@ -3,8 +3,8 @@
 ## Status
 
 - Created: `18-08-2026`
-- Last updated: `09-09-2026`
-- Version: `2.0`
+- Last updated: `24-09-2026`
+- Version: `2.1`
 
 ## Goal
 
@@ -60,7 +60,6 @@ Powinna zawierać:
 - listę działów,
 - graf systemu,
 - kluczowe przepływy / zależności,
-- prerequisite'y spoza systemu,
 - sugerowane wejścia dla nowego użytkownika,
 - status pokrycia systemu.
 
@@ -159,10 +158,19 @@ Dokument nie narzuca finalnego schematu URL, ale wymaga:
 | :--- | :--- | :--- |
 | **System** | /system/ | /system/internet-and-networks/|
 | **Dział** | /section/ | /section/dns/|
-| **Artykuł** | /a/ | /a/recursive-resolution/|
-| **Punkt wejścia** | /gateway/ | /gateway/smartfon/|
-| **Narzędzie** | /tool/ | /tool/traceroute-symulator/|
+| **Artykuł** | /article/ | /article/recursive-resolution/|
+| **Punkt wejścia** | /gateway/ | /gateway/smartphone/|
+| **Narzędzie** | /tool/ | /tool/traceroute-simulator/|
 | **Fundamenty** | /concept/ | /concept/mathematics/
+
+### Slug convention
+
+- Slug jest po angielsku, także dla treści pisanej po polsku. Angielskie nazwy są stabilniejsze (terminologia branżowa jest angielska) i nie mają problemu z diakrytykami. Polskie są tytuł, treść i aliasy, więc wyszukiwarka i czytelnik nie potrzebują angielskiego.
+- Format: kebab-case, małe litery ASCII, cyfry i pojedyncze myślniki (`dns-resolution`, `tcp-handshake`).
+- Slug nazywa temat, a nie jego miejsce: bez prefiksu typu (`/article/dns-resolution`, nie `/article/article-dns-resolution`), bez nazwy systemu lub działu, jeśli nie jest potrzebna do jednoznaczności.
+- Slug jest unikalny w obrębie prefiksu. Wszystkie artykuły dzielą `/article/`, a wszystkie działy `/section/`, niezależnie od systemu, więc slug musi być jednoznaczny w całym Atlasie (`dns-caching`, nie `caching`).
+- Slug wynika z nazwy pliku lub katalogu treści (`docs/public/architecture/content-model.md`). Zmiana slugu to zmiana nazwy pliku; poprzedni adres dostaje redirect.
+- Strony produktu spoza modelu treści (np. wyszukiwarka, „o projekcie”) mogą używać polskich adresów (T-008).
 
 ## Orphan prevention
 
