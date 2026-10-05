@@ -130,8 +130,6 @@ Autor odpowiada za:
 - aktualność informacji,
 - przypisanie istotnych twierdzeń do źródeł.
 
-Szczegóły opisuje `sources-and-citations.md`.
-
 ## AI assistance policy
 
 AI może wspierać:

@@ -3,8 +3,8 @@
 ## Status
 
 - Created: `01-09-2026`
-- Last updated: `10-09-2026`
-- Version: `2.0`
+- Last updated: `24-09-2026`
+- Version: `2.1`
 
 ## Purpose
 
@@ -122,13 +122,15 @@ Nie wdrażać na starcie własnego profilu użytkownika ani rozbudowanego event 
 
 **Decision:** każde istotne twierdzenie może wskazywać stabilny `source id`, a końcowa bibliografia strony jest wyliczana z użytych markerów.
 
-Dokładna składnia autora jest detalem implementacji, ale musi:
+Składnia autora musi:
 
 - działać w zwykłym Markdown,
 - nie wymagać ręcznej numeracji,
 - walidować istnienie źródła,
 - umożliwiać wielokrotne użycie jednego źródła,
 - oddzielać `Sources` od `Further reading`.
+
+Składnia: `[[source:<nazwa>]]`, ta sama co dla linków między encjami (`graph-model.md`, **Link syntax**). W treści wyświetla się `title` źródła. W MVP znacznik nie przyjmuje dodatkowych danych (strona, rozdział).
 
 ## T-008 — URL structure
 
@@ -139,7 +141,7 @@ Dokładna składnia autora jest detalem implementacji, ale musi:
 ```text
 /system/[slug]
 /section/[slug]
-/a/[slug]
+/article/[slug]
 /gateway/[slug]
 /tool/[slug]
 /concept/[slug]
@@ -151,19 +153,23 @@ Dodatkowe strony produktu mogą ale nie muszą używać polskich adresów, np. `
 
 - bez numerów A0–A4 w URL,
 - bez dat publikacji,
-- slug niezależny od pozycji w grafie,
-- poprzednie slugi zachowane przez redirect,
+- slug niezależny od pozycji w grafie i w hierarchii,
+- slug po angielsku, kebab-case, bez prefiksu typu (konwencja w `information-architecture.md`, **Slug convention**),
+- slug wyliczany z nazwy pliku lub katalogu treści, nie zapisywany we frontmatterze,
+- poprzednie slugi zachowane przez redirect; historię prowadzi indeks treści (`content-tooling.md`),
 - każdy publiczny materiał ma jedno canonical URL.
 
 ## T-009 — Typed local relations
 
 **Status:** `CLOSED FOR MVP`
 
-**Decision:** globalna mapa używa `foundation-for`; grafy lokalne zaczynają od trzech typów:
+**Decision:** globalna mapa używa `foundation-for`, wyłącznie między węzłami Atlasu; grafy lokalne zaczynają od typów:
 
-- `prerequisite`,
-- `component-of`,
-- `related`.
+- `component-of` (wyliczany z hierarchii katalogów),
+- `explains` (wyliczany z linków w treści),
+- `illustrates` (tylko tool → treść, do której należy).
+
+`prerequisite` i `related` nie wchodzą do MVP; rolę `prerequisite` przejmuje `explains`. Szczegóły: `graph-model.md`.
 
 Nowy typ relacji można dodać dopiero, gdy:
 
@@ -177,11 +183,13 @@ Nowy typ relacji można dodać dopiero, gdy:
 
 **Decision:** relacje i containment nie są duplikowane.
 
-- hierarchia jest zapisywana od dziecka do rodzica,
+- hierarchia (system/concept/gateway → dział → artykuł) jest zapisana wyłącznie w strukturze katalogów `src/content/`; encje nie wskazują rodzica we frontmatterze,
 - grafowa relacja ma jeden kanoniczny rekord,
-- reverse links, listy dzieci, bibliografie i widoki grafu są wyliczane.
+- slug, route, rodzic, reverse links, listy dzieci, bibliografie i widoki grafu są wyliczane.
 
-**Rationale:** zapobiega dryfowi danych wraz ze wzrostem Atlasu.
+Szczegóły: `content-model.md` (**File layout is the hierarchy**, **Frontmatter contract**).
+
+**Rationale:** zapobiega dryfowi danych wraz ze wzrostem Atlasu. Struktura katalogów jako jedyny zapis hierarchii sprawia, że przeniesienie treści to przeniesienie pliku, a hierarchia jest widoczna bezpośrednio w repozytorium.
 
 ## T-011 — CI and deployment
 

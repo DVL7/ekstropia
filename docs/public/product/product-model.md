@@ -3,8 +3,8 @@
 ## Status
 
 - Created: `18-08-2026`
-- Last updated: `09-09-2026`
-- Version: `2.0`
+- Last updated: `24-09-2026`
+- Version: `2.1`
 
 ## Purpose
 
@@ -24,18 +24,17 @@ Najwyższy poziom produktu. Zawiera globalną mapę, wyszukiwarkę i wejścia do
 
 ### Atlas node
 
-Węzeł globalnej mapy. Może reprezentować jeden z kilku typów elementów i **nie oznacza pojedynczego artykułu**.
+Węzeł globalnej mapy. Reprezentuje system, concept albo gateway i **nie oznacza pojedynczego artykułu**.
 
 Każdy węzeł posiada:
 
-- stabilny identyfikator,
-- nazwę,
+- wskazanie na reprezentowany system, concept lub gateway (jego stabilny identyfikator identyfikuje też węzeł),
 - warstwę A0–A4,
-- typ elementu,
-- krótki opis,
-- status publikacji,
-- relacje z innymi węzłami,
-- opcjonalny docelowy route.
+- nazwę widoczną na mapie (domyślnie tytuł wskazywanej treści),
+- krótki opis (1–2 zdania),
+- relacje z innymi węzłami.
+
+Węzeł nigdy nie ma własnego route ani statusu publikacji. Prowadzi do strony wskazywanej treści, a na mapie pojawia się dopiero wtedy, gdy ta treść ma co najmniej jeden opublikowany dział lub artykuł.
 
 ### Formal science — A0 
 
