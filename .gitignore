@@ -8,6 +8,12 @@
 # private docs
 docs/internal/
 
+# astro
 node_modules
 dist/
 .astro/
+
+# claude 
+CLAUDE.md
+PROGRESS.md
+.claude/
