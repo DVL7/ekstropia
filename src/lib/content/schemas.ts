@@ -10,6 +10,18 @@ Rule: published content needs `lastReviewed` validated by `rules.ts`.
 import { z } from 'astro/zod';
 import {hasReviewDate, reviewDateError } from './rules.ts'
 
+// allowed formats: YYYY | YYYY-MM | YYYY-MM-DD ; always as string
+const PARTIAL_DATE = /^\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|1\d|2\d|3[01]))?)?$/;
+
+// covert date from yaml to string and validate
+const partialDate = z.preprocess(
+    (d) => {
+        if (typeof d === 'number') return String(d);
+        if (d instanceof Date && !Number.isNaN(d.getTime())) return d.toISOString().slice(0, 10);
+        return d;
+    },
+    z.string().regex(PARTIAL_DATE, { error: 'expected YYYY, YYYY-MM or YYYY-MM-DD' }),
+);
 
 // status for content
 const publishedStatus = z.enum([
@@ -37,7 +49,7 @@ export const contextFields = z.strictObject({
     aliases: z.array(z.string()).default([]),  // alternative titles
     summary: z.string().min(1),
     status: publishedStatus,
-    lastReviewed: z.coerce.date().optional(),
+    lastReviewed: z.date().optional(),
 })
 
 // shared by sections in different types of contents
@@ -61,7 +73,7 @@ export const articleFields = z.strictObject({
     status: publishedStatus,
     changeSensitivity: z.enum(['low', 'medium', 'high']),
     order: z.int().min(1),  
-    lastReviewed: z.coerce.date().optional(),
+    lastReviewed: z.date().optional(),
 });
 
 // shared in different types of sources
@@ -69,7 +81,7 @@ export const sourceFields = z.strictObject({
     id: z.string().min(1),
     title: z.string().min(1),
     authors: z.array(z.string()).min(1),
-    published: z.coerce.date().optional(),
+    published: partialDate.optional(),
     url: z.url({ protocol: /^https?$/ }).optional(),
     notes: z.string().optional(),
 });
@@ -129,7 +141,7 @@ export const toolSchema = z.strictObject({
     learningGoal: z.string().min(1),
     fallbackDescription: z.string().min(1),  // description which describe the goal, can replace the tool
     standalone: z.boolean(),                 // false = embedded in article, true has own route
-    lastReviewed: z.coerce.date().optional(),
+    lastReviewed: z.date().optional(),
 }).refine(hasReviewDate, reviewDateError);
 
 export const standardSourceSchema = z.strictObject({
@@ -158,12 +170,12 @@ export const reportSourceSchema = z.strictObject({
 export const documentationSourceSchema = z.strictObject({
     ...sourceFields.shape,
     url: z.url({ protocol: /^https?$/ }),
-    accessedAt: z.coerce.date(),
+    accessedAt: z.date(),
     version: z.string().optional(),
 });
 
 export const webSourceSchema = z.strictObject({
     ...sourceFields.shape,
     url: z.url({ protocol: /^https?$/ }),
-    accessedAt: z.coerce.date(),
+    accessedAt: z.date(),
 });
