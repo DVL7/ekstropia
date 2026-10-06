@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://ekstropia.pl", target="_blank">
+  <a href="https://ekstropia.pl">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="public/logo-horizontal-dm.svg">
       <source media="(prefers-color-scheme: light)" srcset="public/logo-horizontal.svg">
@@ -8,12 +8,12 @@
   </a>
 </p>
 
-Repozytorium projektu Ekstropia — interaktywnego atlasu wiedzy o tym,
+Repozytorium projektu Ekstropia - interaktywnego atlasu wiedzy o tym,
 jak działa współczesny świat.
 
 <p align="left">
   <img alt="Status" src="https://img.shields.io/badge/status-early%20development-orange" />
-  <img alt="Version" src="https://img.shields.io/badge/release-v0.1-blue" />
+  <img alt="Version" src="https://img.shields.io/badge/release-v0.2-blue" />
   <img alt="Astro" src="https://img.shields.io/badge/Astro-FF5A5F?logo=astro&logoColor=white" />
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" />
   <img alt="Markdown + Frontmatter" src="https://img.shields.io/badge/Markdown%20%2B%20Frontmatter-8B5CF6?logo=markdown&logoColor=white" />
@@ -21,23 +21,32 @@ jak działa współczesny świat.
 
 ## Nawigacja po repozytorium
 
-- [`src/`](src/) — kod źródłowy projektu.
-- [`src/content/`](src/content/) — artykuły i treść Atlasu.
-- [`public/`](public/) - Czcionki i grafiki których używa strona.
-- [`docs/public/`](docs/public/) — publiczna dokumentacja produktu, architektury i zasad tworzenia treści.
-- [`scripts/`](scripts/) — skrypty walidacyjne.
+- [`src/`](src/) - kod źródłowy projektu.
+- [`src/content/`](src/content/) - artykuły i treść Atlasu.
+- [`src/lib/content/`](src/lib/content/) - schematy frontmattera i reguły walidacji treści.
+- [`public/`](public/) - czcionki i grafiki których używa strona.
+- [`docs/public/`](docs/public/) - publiczna dokumentacja produktu, architektury i zasad tworzenia treści.
+- [`scripts/`](scripts/) - skrypty walidacyjne.
+
+## Stan projektu
+
+Projekt jest we wczesnej fazie rozwoju. Strona [ekstropia.pl](https://ekstropia.pl)
+pokazuje layout informacyjny „w budowie”, a Atlas nie ma jeszcze opublikowanej treści.
+Gotowy jest model treści: opisany w dokumentacji i zapisany w schematach. W następnej kolejności
+powstaną walidacja i skrypty do tworzenia treści.
+
 
 ## Branche
 
-- `main` — bieżący stan prac nad stroną (może zawierać zmiany które nie zostały wdrożone).
-- `release` — branch produkcyjny, odzwierciedla to, co aktualnie widać na stronie.
+- `main` - bieżący stan prac nad stroną (może zawierać zmiany które nie zostały wdrożone).
+- `release` - branch produkcyjny, odzwierciedla to, co aktualnie widać na stronie.
 
 ## Licencje
 
 | Katalog | Zawartość | Licencja |
 |---|---|---|
-| `/src/`  | Kod źródłowy | MIT — patrz [`LICENSE`](LICENSE) |
-| `/src/content/` | Artykuły, treść Atlasu | CC BY-SA 4.0 — patrz [`content/LICENSE`](src/content/LICENSE) |
-| `/docs/` | Dokumentacja | Wszelkie prawa zastrzeżone — patrz [`docs/LICENSE`](docs/LICENSE) |
+| `/src/`, `/scripts/`, `/tests/` | Kod źródłowy | MIT - patrz [`LICENSE`](LICENSE) |
+| `/src/content/` | Artykuły, treść Atlasu | CC BY-SA 4.0 - patrz [`src/content/LICENSE`](src/content/LICENSE) |
+| `/docs/` | Dokumentacja | Wszelkie prawa zastrzeżone - patrz [`docs/LICENSE`](docs/LICENSE) |
 | `/public/` | Grafiki i loga | Wszelkie prawa zastrzeżone - patrz [`public/LICENSE`](public/LICENSE) |
 | `/public/fonts/` | Czcionki | Do każdej czcionki dołączona jest licencja twórcy |
